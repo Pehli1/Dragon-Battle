@@ -8,14 +8,16 @@ using namespace std;
 int PlayerAttack();
 int DragonAttack();
 int PlayerTurn();
+int DragonTurn();
 
+int PlayerHealth = 100;
+int HostileDragonHealth = 100;
 
 int main()
 {
 	srand(time(NULL));
 
-	int PlayerHealth = 100;
-	int HostileDragonHealth = 100;
+
 
 	int round = 1;
 
@@ -27,19 +29,17 @@ int main()
 	{
 		cout << "***************** Round " << round++ << " *****************" << endl;
 
-
-
-		auto playerAttack = PlayerAttack();
-		auto dragonAttack = DragonAttack();
-
-		cout << "Player Health: " << PlayerHealth << endl;
-		cout << "Dragon Health: " << HostileDragonHealth << endl;
-
-		cout << "You dealt: " << playerAttack << " Damage" << endl;
-		cout << "Dragon dealt: " << dragonAttack << " Damage" << endl;
-
-		PlayerHealth -= dragonAttack;
-		HostileDragonHealth -= playerAttack;
+		cout << "-------------" << endl;
+		cout << "Players Turn:" << endl;
+		cout << endl;
+		PlayerTurn();
+		
+		cout << "-------------" << endl;
+		cout << "Dragons Turn:" << endl;
+		cout << endl;
+		DragonTurn();
+		
+		
 
 		if (PlayerHealth <= deathCondition)
 		{
@@ -73,5 +73,25 @@ int DragonAttack() {
 int PlayerTurn()
 {
 
+	auto playerAttack = PlayerAttack();
+
+	cout << "Player Health: " << PlayerHealth << endl;
+
+	cout << "You dealt: " << playerAttack << " Damage" << endl;
+
+	HostileDragonHealth -= playerAttack;
+	return 0;
+}
+
+int DragonTurn() {
+	auto dragonAttack = DragonAttack();
+
+
+	cout << "Dragon Health: " << HostileDragonHealth << endl;
+
+
+	cout << "Dragon dealt: " << dragonAttack << " Damage" << endl;
+
+	PlayerHealth -= dragonAttack;
 	return 0;
 }
